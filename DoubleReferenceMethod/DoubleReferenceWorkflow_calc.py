@@ -40,7 +40,7 @@ def DoubleReferenceWorkflow(snap,external_bias_vector,calc_neutral_no_vacuum,cal
 
         - C_guess: float, 
             initial guess for the capacitance of the interface
-            default: 1/80 e/(V A^2) (same defalt value of the FCP2rm calculator)
+            default: 1/80 e/(V A^2) (same default value of the FCP2rm calculator)
 
         - restart: bool, 
             if True the calculation will start from the calculation of the system with a vacuum region, and with dipole corrections
