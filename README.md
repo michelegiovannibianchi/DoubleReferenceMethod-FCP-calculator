@@ -93,12 +93,13 @@ Folder [Examples/Constant_potential](https://github.com/michelegiovannibianchi/F
               calculator for system without a vacuum region and extra charge
   
           - guess_extra_electrons: int, 
-              initial guess of extra electrons to add to the system to the first point of the external_bias_vector 
+              initial guess of extra electrons to add to the system to the first point of the
+              external_bias_vector 
               default:  0, i.e. start from the neutral system
   
           - C_guess: float, 
               initial guess for the capacitance of the interface
-              default: 1/80 e/(V A^2) (same default value of the FCP2rm calculator)
+              default: 1/80 e/(V A^2) (same default value of the FCP2 calculator)
   
           - restart: bool, 
               if True the calculation will start from the calculation of the system with a vacuum region, and with dipole corrections
@@ -112,7 +113,7 @@ Folder [Examples/Constant_potential](https://github.com/michelegiovannibianchi/F
 > [!NOTE]  
 > The ```external_bias_vector``` parameter allows a list of various target potentials, enabling the computation of multiple potentials on the same geometry. This is beneficial since it only needs to compute the auxiliary systems once, and it speeds up the convergence of the FCP by proposing the guess of additional electrons among the target potentials using a linear charge-potential interpolation.
 
-For reference, folder [Examples/PZC](https://github.com/michelegiovannibianchi/FCP-calculator-DoubleReferenceMethod/tree/main/Examples/PZC) reports an example at the PZC, when there is no need of the auxiliary systems of the *Double Reference Method*.
+For reference, folder [Examples/PZC](https://github.com/michelegiovannibianchi/FCP-calculator-DoubleReferenceMethod/tree/main/Examples/PZC) reports an example at the PZC, with the same settings, but when there is no need of the auxiliary systems of the *Double Reference Method*.
  
 ## Citing
 If you find this calculator useful, please cite our work using the following bibtex entry:
