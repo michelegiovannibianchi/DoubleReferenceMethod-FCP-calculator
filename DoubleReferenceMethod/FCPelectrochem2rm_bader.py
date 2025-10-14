@@ -13,13 +13,18 @@ from ase.calculators.vasp import Vasp
 from ase.io import write,read
 from ase.io.vasp import write_vasp
 from ase.parallel import world
-import macrodensity as md # Modified version
+import macrodensity as md
 from ase.io.bader import attach_charges
 
 from ase.calculators.DoubleReferenceMethod.utils import average_potential,compute_Bader
 
 class FCP2rm(FileIOCalculator):
-    """Fully constant potential calculator for electrochemistry implementing the "Double Reference Method" by Taylor et al., Phys. Rev. B 73, 165402 (DOI: https://doi.org/10.1103/PhysRevB.73.165402)"""
+    """
+        Fully constant potential calculator for electrochemistry implementing the "Double Reference Method" by Taylor et al.,
+        Phys. Rev. B 73, 165402 (DOI: https://doi.org/10.1103/PhysRevB.73.165402)
+
+        This FCP calculator is adapted from https://github.com/hellozhaoming/FCP-vasp-ase
+    """
 
     name='FCP'
     implemented_properties = [
