@@ -69,7 +69,7 @@ Folder [Examples/Constant_potential](https://github.com/michelegiovannibianchi/F
      - ``` calc_neutral_vacuum_no_dipole ``` and ```calc_neutral_vacuum_dipole``` for the "Neutral vacuum system" (the first is performed without dipole corrections and is meant to facilitate the convergence of the second with dipole corrections)
      - ```calc_charge``` for the "Charged system".
        
-2. Call of ```DoubleReferenceWorkflow``` function controlling the Double Reference workflow.
+2. Call of a wrapper for the ```DoubleReferenceWorkflow``` function controlling the Double Reference workflow.
 
   The arguments of ```DoubleReferenceWorkflow``` are:
   ```

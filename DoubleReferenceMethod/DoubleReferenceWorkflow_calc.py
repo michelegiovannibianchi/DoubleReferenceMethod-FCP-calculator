@@ -11,6 +11,20 @@ import numpy as np
 import sys 
 
 
+# Define a wrapper class to encapsulate the Double Reference Workflow
+class DoubleReferenceEvaluator:
+    def __init__(self, workflow_func, **kwargs):
+        self.workflow_func = workflow_func
+        self.kwargs = kwargs
+        self.results = None
+
+    def evaluate(self, atoms):
+        # Call the workflow with the atoms and stored kwargs
+        self.results = self.workflow_func(snap=atoms, **self.kwargs)
+        return self.results
+
+
+
 def DoubleReferenceWorkflow(snap,external_bias_vector,calc_neutral_no_vacuum,calc_neutral_vacuum_no_dipole,calc_neutral_vacuum_dipole,calc_charge,guess_extra_electrons,C_guess,restart,V_SHE=None):
     """Function implementing the Double Reference Workflow
     For teoretical foundations, see the original article DOI: https://doi.org/10.1103/PhysRevB.73.165402

@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --nodes=1           # Number of nodes
 #SBATCH --ntasks-per-node=4 # Number of MPI ranks per node
-#SBATCH --time=08:00:00     # Walltime, format: HH:MM:SS
+#SBATCH --time=00:15:00     # Walltime, format: HH:MM:SS
 #SBATCH --exclusive
 #SBATCH --gres=gpu:4        # Number of requested gpus per node, can vary between 1 and 4
 #SBATCH -A IscrB_HERMAN 
@@ -18,30 +18,27 @@ module load profile/chem-phys
 module load vasp
 
 # Activate environment
-# mamba init
+# conda init
 source ~/.bashrc
 
 # Specify your conda env with ASE and the DoubleReferenceMethod package installed
-mamba activate /leonardo/home/userexternal/mbianchi/miniforge3/envs/test_FCP/
+conda activate /path/to/your/conda/environment/with/DoubleReferenceMethod/calculator
 
 # Export VASP Command and the path for the Pseudopotential directory
 export ASE_VASP_COMMAND="mpirun -np ${SLURM_NTASKS} vasp_std"
 #Specify the path for your Pseudo-potential folder
-export VASP_PP_PATH=/leonardo/home/userexternal/mbianchi/pseudo/Pseudo_VASP
+export VASP_PP_PATH=/path/to/your/VASP/pseudo
 
 #### 2) Specific settings for the Double Reference workflow
 
 # Path for Bader code and utils
 # Specify your path
-Bader_code_path="/leonardo/home/userexternal/mbianchi/Bader"
-Bader_util_path="/leonardo/home/userexternal/mbianchi/Bader/vtstscripts-1033"
+Bader_code_path="/path/to/your/Bader/installation"
+Bader_util_path="/path/to/your/vtstscripts/installation"
 
 # Path for the python script implementing the Double Reference Method workflow
 # Customize your VASP setting inside it
-DoubleReference_script="DoubleReferenceWorkflow_Const_Pot.py"
-
-# Path for the POSCAR
-Poscar_path=../../../DEAL/POSCAR_temp/m075
+DoubleReference_script="DoubleRefernceWorkflow_Const_Pot.py"
 
 # Specify folder that will be create for the whole calculation
 folder="case_1"
@@ -56,7 +53,7 @@ mkdir $folder
 cp $DoubleReference_script $folder/
 cp $Bader_code_path/bader $folder/
 cp $Bader_util_path/chgsum.pl $folder/
-cp $Poscar_path/POSCAR_1 $folder/POSCAR
+cp POSCAR $folder/POSCAR
 
 
 # Enter in the working directory and start the computation
@@ -75,4 +72,4 @@ rm bader
 # Come back in the starting folder
 cd ..
 
-mamba deactivate
+conda deactivate

@@ -1,6 +1,6 @@
 from ase.io import read,write
 from ase.calculators.vasp import Vasp
-from ase.calculators.DoubleReferenceMethod.DoubleReferenceWorkflow_calc import DoubleReferenceWorkflow
+from ase.calculators.DoubleReferenceMethod.DoubleReferenceWorkflow_calc import DoubleReferenceEvaluator,DoubleReferenceWorkflow
 import numpy as np
 
 #################   Definition of the different ASE-VASP Calculators to compute the "Double Reference Method"   #################
@@ -145,15 +145,22 @@ snap=read('POSCAR',format='vasp')
 #            default: 4.44 V
 #        """
 
-DoubleReferenceWorkflow(
-                        snap=snap,
-                        external_bias_vector=[-0.5, -0.75, -1.0],
-                        calc_neutral_no_vacuum=calc_neutral_no_vacuum,
-                        calc_neutral_vacuum_no_dipole=calc_neutral_vacuum_no_dipole,
-                        calc_neutral_vacuum_dipole=calc_neutral_vacuum_dipole,
-                        calc_charge=calc_charge,
-                        guess_extra_electrons=1,
-                        C_guess=0.008856,
-                        restart=False
+# Prepare arguments for your workflow
+workflow_args = dict(
+                    external_bias_vector=[-0.5, -0.75, -1.0],
+                    calc_neutral_no_vacuum=calc_neutral_no_vacuum,
+                    calc_neutral_vacuum_no_dipole=calc_neutral_vacuum_no_dipole,
+                    calc_neutral_vacuum_dipole=calc_neutral_vacuum_dipole,
+                    calc_charge=calc_charge,
+                    guess_extra_electrons=1,
+                    C_guess=0.008856,
+                    restart=False
                         )
+
+# Attach evaluator
+snap.evaluator = DoubleReferenceEvaluator(DoubleReferenceWorkflow, **workflow_args)
+
+# Trigger calculation
+result = snap.evaluator.evaluate(snap)
+
 print("Calculation terminated")
