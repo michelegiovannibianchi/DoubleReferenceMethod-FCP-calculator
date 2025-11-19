@@ -1,4 +1,4 @@
-# FCP-calculator-DoubleReferenceMethod
+# DoubleReferenceMethod-FCP-calculator
 
 ## Introduction
 We present a Fully-converged Constant Potential (FCP) *ase* calculator that is compatible with the [*Double Reference Method*](https://journals.aps.org/prb/abstract/10.1103/PhysRevB.73.165402) to simulate metal/water interfaces in an electronically grand-canonical ensemble.
