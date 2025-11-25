@@ -11,7 +11,7 @@ The core of the package is the FCP calculator, implemented in [hellozhaoming/FCP
 
 <img src="Scheme_DRM.png" alt="Scheme_DRM" width="50%">
 
-For detailed information see the original article of the [*Double Reference Method*](https://journals.aps.org/prb/abstract/10.1103/PhysRevB.73.165402), while for the integration of this calculator in a Machine Learning Potential workflow please check our paper xxxxxxxxxxxxxxx.
+For detailed information see the original article of the [*Double Reference Method*](https://journals.aps.org/prb/abstract/10.1103/PhysRevB.73.165402), while for the integration of this calculator in a Machine Learning Potential workflow please check our paper [*Electrochemical Interfaces at Constant Potential: Data-Efficient Transfer Learning for Machine-Learning-Based Molecular Dynamics*](https://arxiv.org/abs/2511.19338).
 
 ## Contents
 
@@ -117,4 +117,14 @@ For reference, folder [Examples/PZC](https://github.com/michelegiovannibianchi/F
  
 ## Citing
 If you find this calculator useful, please cite our work using the following bibtex entry:
-xxxxxxxxx
+```
+@misc{bianchi2025electrochemicalinterfacesconstantpotential,
+      title={Electrochemical Interfaces at Constant Potential: Data-Efficient Transfer Learning for Machine-Learning-Based Molecular Dynamics}, 
+      author={Michele Giovanni Bianchi and Michele Re Fiorentin and Francesca Risplendi and Candido Fabrizio Pirri and Michele Parrinello and Luigi Bonati and Giancarlo Cicero},
+      year={2025},
+      eprint={2511.19338},
+      archivePrefix={arXiv},
+      primaryClass={physics.comp-ph},
+      url={https://arxiv.org/abs/2511.19338}, 
+}
+```
