@@ -96,6 +96,7 @@ def add_vacuum(snap,n_molecule):
                 elif symbol[j]=='H':
                     index_H.append(j)
                     count_H=count_H+1
+                #else: # other chemical species
             
                 
     
@@ -103,28 +104,30 @@ def add_vacuum(snap,n_molecule):
         H_up=np.zeros(count_H)
         
     
-        if pos[index_O,2]> c_new/2:#O atom is in the water region above the slab
-            O_up=1
-        #Loop over H atoms inside the same molecule (Usually 2 H atom per molecule but here more general formulation to consider cases of hydronium and hydroxide ions)
-        for kk in range(0,count_H):#
+        if count_H==2:# check on H number per molecule to verify that the identified O atom belongs to a water molecule
+            if pos[index_O,2]> c_new/2:#O atom is in the water region above the slab
+                O_up=1
+            #Loop over H atoms inside the same molecule (Usually 2 H atom per molecule but here more general formulation to consider cases of hydronium and hydroxide ions)
+            for kk in range(0,count_H):#
+                
+                if pos[index_H[kk],2]> c_new/2: #H is in the water region above the slab
+                    H_up[kk]=1
             
-            if pos[index_H[kk],2]> c_new/2: #H is in the water region above the slab
-                H_up[kk]=1
+         
         
-     
-    
-        if (O_up==0 and max(H_up)==1) or (O_up==1 and min(H_up)==0):
-        # Condition 1)O in water region below slab AND one H abow the slab at least  OR 2) O in region above AND one H is below
-        # This identifies the condition when a O-H bond was broken adding the vacuum
-                if O_up==0:
-                    pos[index_O,2]=pos[index_O,2]+c_old #Duplicate O atom on the edge
-                
-                #Loop over H atoms inside the same molecule
-                for kk in range(0,count_H):
-                    if H_up[kk]==0:
-                        pos[index_H[kk],2]=pos[index_H[kk],2]+c_old #Duplicate H atom on the edge
-                
-                
+            if (O_up==0 and max(H_up)==1) or (O_up==1 and min(H_up)==0):
+            # Condition 1)O in water region below slab AND one H abow the slab at least  OR 2) O in region above AND one H is below
+            # This identifies the condition when a O-H bond was broken adding the vacuum
+                    if O_up==0:
+                        pos[index_O,2]=pos[index_O,2]+c_old #Duplicate O atom on the edge
+                    
+                    #Loop over H atoms inside the same molecule
+                    for kk in range(0,count_H):
+                        if H_up[kk]==0:
+                            pos[index_H[kk],2]=pos[index_H[kk],2]+c_old #Duplicate H atom on the edge
+                    
+                    
+        #else: #this O atom does not belong to a water molecule
                             
     snap.set_positions(pos)
     
@@ -227,5 +230,6 @@ def convert_V_to_label(V):
         V_labels=str('p'+mantissa+digits)
     else:
         V_labels=str('m'+mantissa+digits)
+
 
     return V_labels
