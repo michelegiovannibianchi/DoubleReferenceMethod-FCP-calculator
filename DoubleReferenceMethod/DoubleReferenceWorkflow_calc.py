@@ -186,7 +186,7 @@ def DoubleReferenceWorkflow(snap,external_bias_vector,calc_neutral_no_vacuum,cal
 
     # Append to the RECAP file other relevant info
     with open('RECAP.dat', 'a') as fp:
-        fp.writelines('No extra charge + no vacuum: Potential in the slab [V], Vaccum level [V]:\n')
+        fp.writelines('No extra charge + vacuum: Potential in the slab [V], Vaccum level [V]:\n')
         fp.writelines(str(phi_prime_m_r))
         fp.writelines('\n')
         fp.writelines(str(phi_prime_v_r))
